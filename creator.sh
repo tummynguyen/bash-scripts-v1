@@ -2,6 +2,9 @@
 
 echo "[+] RUNNING $0" 
 
+echo -e '\n[+] ENTER NAME: '
+read name 
+
 echo -e '\n[+] ENTER INTERPRETER (TYPE A NUMBER): '
 
 echo '1) BASH'
@@ -9,9 +12,6 @@ echo '2) PYTHON'
 echo '3) CUSTOM!'
 echo '4) EXIT!'
 read script 
-
-echo -e '\n[+] ENTER NAME: '
-read name 
 
 case $script in
  1)
