@@ -1,9 +1,11 @@
 #!/bin/bash
 
-echo -e '\nENTER NAME: '
+echo "[+] RUNNING $0" 
+
+echo -e '\n[+] ENTER NAME: '
 read name 
 
-echo -e '\nENTER INTERPRETER (TYPE A NUMBER): '
+echo -e '\n[+] ENTER INTERPRETER (TYPE A NUMBER): '
 
 echo '1) BASH'
 echo '2) PYTHON'
