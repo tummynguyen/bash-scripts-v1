@@ -1,12 +1,14 @@
 #!/bin/bash
 
-echo -e '\nENTER SCRIPT TYPE (TYPE A NUMBER)'
+echo -e '\nENTER NAME: '
+read name 
+
+echo -e '\nENTER INTERPRETER (TYPE A NUMBER): '
 
 echo '1) BASH'
 echo '2) PYTHON'
 echo '3) CUSTOM!'
 echo '4) EXIT!'
-
 read script 
 
 case $script in
@@ -20,7 +22,7 @@ case $script in
  touch ${name}.py
  chmod +x ${name}.py 
  read -p "PYTHON 3.6? (yes/no)" python
- if [[ $python == yes ]]
+ if [[ $python == yes ]] || [[ $python == y ]]
   then
       echo '#!/usr/bin/python3.6' >> ${name}.py
   else 
