@@ -24,7 +24,7 @@ case $script in
  touch ${name}.py
  chmod +x ${name}.py 
  read -p "PYTHON 3.6? (yes/no)" python
- if [[ $python == yes ]] || [[ $python == y ]]
+ if [[ $python == yes ]] || [[ $python == y ]] || [[ $python == "" ]]
   then
       echo '#!/usr/bin/python3.6' >> ${name}.py
   else 
@@ -33,7 +33,7 @@ case $script in
   echo -e "\n${name}.py was sucessfully created on $(pwd) at $(date)" ;;
 
  3)
- echo "TYPE A PROGRAM"
+ echo -e "\n[+] TYPE A INTERPRETER"
  read type 
  touch ${name}.${type}
  chmod +x ${name}.${type}
