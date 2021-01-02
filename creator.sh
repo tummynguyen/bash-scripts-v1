@@ -23,7 +23,7 @@ case $script in
  2)
  touch ${name}.py
  chmod +x ${name}.py 
- read -p "PYTHON 3.6? (yes/no)" python
+ read -p "PYTHON 3.8? [Y/n]" python
  if [[ $python == yes ]] || [[ $python == y ]] || [[ $python == "" ]]
   then
       echo '#!/usr/bin/python3.6' >> ${name}.py
