@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# ONLY ROOT CAN ONLY CAN RUN SCRIPT 
+if [[ $UID != 0 ]]
+then 
+	echo "[+] YOU MUST BE ROOT TO RUN THIS SCRIPT!"
+fi
+
+# INSTALLING NIKTO IF UNAVAILABLE
+if [[ ! -f /usr/bin/nikto ]]
+then
+	echo "[+] NIKTO IS UNAVAILABLE IN YOUR SYSTEM..."
+	echo "[+] INSTALLING NIKTO..."
+	apt install nikto -yy 
+fi 
+
+# INPUT THE IP OR SUBNET [USE POSITIONAL PARAMETERS FOR MORE INPUTS] 
+echo -e "[+] ENTER AN IP OR SUBNET:"
+read ip
+
+# NMAP SCAN ON PORT HTTP 80 
+echo -e "\n[+] NMAP SCANNING ON $ip FOR  PORT 80"
+nmap -sV -p 80 ${ip} -oG REPORT.TXT > /dev/null
+if grep -q  "open" REPORT.TXT > /dev/null 
+then 
+ echo -e "TCP PORT 80 FOUND!"
+else 
+ echo -e "TCP PORT 80 UNVALIABLE!\nEXITING SCRIPT"
+ exit
+fi
+
+# INPUTTING THE TARGET IP INTO A TEXT FILE
+echo -e "\n[+] INPUTTING TARGET IP ON TARGET.TXT"
+cat REPORT.TXT | awk '/Up$/{print $2}'  > TARGET.TXT
+echo -e "SUCCESSFULLY GENERATED TARGET.TXT ON $PWD"
+
+
+# WEB SCANNING USING NIKTO ON TARGET FILE
+echo -e "\n[+] WEB SCANNING TARGET" 
+nikto -h TARGET.TXT >> REPORT.TXT
+
+# CREATE THE A VULNERABILITY
+echo -e "\n[+] SUCCESSFULLY CREATED REPORT.TXT" 
+cat -n REPORT.TXT 
+
+# DELETE TARGET.TXT
+rm -rf TARGET.TXT 
+
