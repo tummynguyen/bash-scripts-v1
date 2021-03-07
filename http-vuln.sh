@@ -4,14 +4,15 @@
 if [[ $UID != 0 ]]
 then 
 	echo "[+] YOU MUST BE ROOT TO RUN THIS SCRIPT!"
+	exit
 fi
 
-# INSTALLING NIKTO IF UNAVAILABLE
-if [[ ! -f /usr/bin/nikto ]]
+# INSTALLING NIKTO OR NMAP IF UNAVAILABLE
+if [[ ! -f /usr/bin/nikto ]] || [[ ! -f /usr/bin/nmap ]]
 then
-	echo "[+] NIKTO IS UNAVAILABLE IN YOUR SYSTEM..."
-	echo "[+] INSTALLING NIKTO..."
-	apt install nikto -yy 
+	echo "[+] MUST INSTALL DEPENDENCIES"
+	echo "[+] INSTALLING: "
+	apt update -yy && apt install nikto -yy  && apt install nmap -yy 
 fi 
 
 # INPUT THE IP OR SUBNET [USE POSITIONAL PARAMETERS FOR MORE INPUTS] 
